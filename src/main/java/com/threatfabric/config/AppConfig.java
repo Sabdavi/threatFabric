@@ -18,7 +18,7 @@ public class AppConfig {
     public DataSource mysqlDataSource() {
         final BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/Test");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/ThreatFabric");
         dataSource.setUsername("root");
         dataSource.setPassword("saeid");
         return dataSource;
