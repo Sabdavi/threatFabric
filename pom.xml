@@ -7,6 +7,7 @@
     <groupId>com.threatfabric</groupId>
     <artifactId>fabric-dectection</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
 
@@ -79,6 +80,12 @@
             <version>6.0.0.Alpha5</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.22.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
