@@ -1,6 +1,7 @@
 package com.threatfabric.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,9 +16,16 @@ public class DetectionInfo {
     @Column(unique = true)
     private UUID detectionId;
 
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date detectionTime;
 
+    @NotNull
     private String nameOfApp;
 
+    @NotNull
     private String typeOfApp;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Device device;
 }

@@ -1,6 +1,9 @@
 package com.threatfabric.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,9 +17,14 @@ public class Device {
     @Column(unique = true)
     private UUID deviceUid;
 
+    @NotNull
     private int deviceType;
 
+    @NotNull
     private int deviceModel;
 
     private String osVersion;
+
+    @OneToMany(mappedBy = "device")
+    private List<DetectionInfo> detectionInfos = new ArrayList<>();
 }
