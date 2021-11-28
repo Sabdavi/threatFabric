@@ -1,2 +1,7 @@
-package com.threatfabric.dao;public interface DetectionDao {
+package com.threatfabric.dao;
+
+import com.threatfabric.entity.Detection;
+
+public interface DetectionDao {
+    Detection save(Detection detection);
 }

@@ -1,6 +1,7 @@
 package com.threatfabric.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -23,29 +24,37 @@ public class AppConfig {
         dataSource.setPassword("saeid");
         return dataSource;
     }
+
     @Bean
-    public LocalSessionFactoryBean factoryBean(DataSource dataSource){
-        LocalSessionFactoryBean  factoryBean = new LocalSessionFactoryBean();
+    public LocalSessionFactoryBean factoryBean(DataSource dataSource) {
+        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setPackagesToScan("com.threatfabric.model");
+        factoryBean.setPackagesToScan("com.threatfabric.entity");
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
-        properties.setProperty("hibernate.current_session_context_class","thread");
-        properties.setProperty("hibernate.show_sql","false");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.current_session_context_class", "thread");
+        properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         factoryBean.setHibernateProperties(properties);
         return factoryBean;
     }
+
     @Bean
-    public MappingJackson2HttpMessageConverter converter(){
+    public MappingJackson2HttpMessageConverter converter() {
         return new MappingJackson2HttpMessageConverter();
     }
+
     @Bean
-    public RequestMappingHandlerAdapter adapter(MappingJackson2HttpMessageConverter converter){
+    public RequestMappingHandlerAdapter adapter(MappingJackson2HttpMessageConverter converter) {
         RequestMappingHandlerAdapter handlerAdapter = new RequestMappingHandlerAdapter();
         handlerAdapter.getMessageConverters().add(converter);
         return handlerAdapter;
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
 }

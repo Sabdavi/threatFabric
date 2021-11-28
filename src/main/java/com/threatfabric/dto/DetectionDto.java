@@ -1,40 +1,37 @@
-package com.threatfabric.model;
+package com.threatfabric.dto;
 
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.NotNull;
+
+import com.threatfabric.entity.DetectionType;
+
 import java.util.Date;
-import java.util.UUID;
 
-public class Detection {
+public class DetectionDto {
 
-    public Detection() {
+    public DetectionDto() {
     }
 
-    private long id;
 
-    private UUID detectionId;
-
-    @NotNull
+    private Long id;
+    private String detectionId;
     private Date detectionTime;
-
-    @NotNull
     private String nameOfApp;
-
-    @NotNull
     private String typeOfApp;
+    private DetectionType detectionType;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public UUID getDetectionId() {
+    public String getDetectionId() {
         return detectionId;
     }
 
-    public void setDetectionId(UUID detectionId) {
+    public void setDetectionId(String detectionId) {
         this.detectionId = detectionId;
     }
 
@@ -60,5 +57,13 @@ public class Detection {
 
     public void setTypeOfApp(String typeOfApp) {
         this.typeOfApp = typeOfApp;
+    }
+
+    public DetectionType getDetectionType() {
+        return detectionType;
+    }
+
+    public void setDetectionType(DetectionType detectionType) {
+        this.detectionType = detectionType;
     }
 }

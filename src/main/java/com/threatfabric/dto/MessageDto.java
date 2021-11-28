@@ -1,28 +1,28 @@
-package com.threatfabric.model;
+package com.threatfabric.dto;
 
 
 import java.util.List;
 
-public class Message {
-    private Device device;
-    private List<Detection> detections;
+public class MessageDto {
+    private DeviceDto deviceDto;
+    private List<DetectionDto> detectionDtos;
 
-    public Message() {
+    public MessageDto() {
     }
 
-    public Device getDevice() {
-        return device;
+    public DeviceDto getDevice() {
+        return deviceDto;
     }
 
-    public void setDevice(Device device) {
-        this.device = device;
+    public void setDevice(DeviceDto deviceDto) {
+        this.deviceDto = deviceDto;
     }
 
-    public List<Detection> getDetections() {
-        return detections;
+    public List<DetectionDto> getDetections() {
+        return detectionDtos;
     }
 
-    public void setDetections(List<Detection> detections) {
-        this.detections = detections;
+    public void setDetections(List<DetectionDto> detectionDtos) {
+        this.detectionDtos = detectionDtos;
     }
 }

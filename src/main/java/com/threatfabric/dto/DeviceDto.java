@@ -1,54 +1,49 @@
-package com.threatfabric.model;
+package com.threatfabric.dto;
 
-import javax.validation.constraints.NotNull;
-import java.util.UUID;
+//import javax.validation.constraints.NotNull;
 
-public class Device {
+import com.threatfabric.entity.DeviceType;
 
-    public Device() {
+public class DeviceDto {
+
+    public DeviceDto() {
     }
 
-    private long id;
-
-    private UUID deviceUid;
-
-    @NotNull
-    private int deviceType;
-
-    @NotNull
-    private int deviceModel;
-
+    private Long id;
+    private String deviceUid;
+    private DeviceType deviceType;
+    private String deviceModel;
     private String osVersion;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public UUID getDeviceUid() {
+    public String getDeviceUid() {
         return deviceUid;
     }
 
-    public void setDeviceUid(UUID deviceUid) {
+    public void setDeviceUid(String deviceUid) {
         this.deviceUid = deviceUid;
     }
 
-    public int getDeviceType() {
+    public DeviceType getDeviceType() {
         return deviceType;
     }
 
-    public void setDeviceType(int deviceType) {
+    public void setDeviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
     }
 
-    public int getDeviceModel() {
+    public String getDeviceModel() {
         return deviceModel;
     }
 
-    public void setDeviceModel(int deviceModel) {
+    public void setDeviceModel(String deviceModel) {
         this.deviceModel = deviceModel;
     }
 

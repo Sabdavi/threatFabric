@@ -1,2 +1,8 @@
-package com.threatfabric.service;public class DetectionService {
+package com.threatfabric.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class DetectionService {
+
 }
