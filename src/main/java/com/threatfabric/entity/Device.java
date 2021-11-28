@@ -26,5 +26,5 @@ public class Device {
     private String osVersion;
 
     @OneToMany(mappedBy = "device")
-    private List<DetectionInfo> detectionInfos = new ArrayList<>();
+    private List<Detection> detections = new ArrayList<>();
 }

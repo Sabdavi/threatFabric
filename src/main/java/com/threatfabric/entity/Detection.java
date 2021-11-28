@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "DetectionInfo")
-public class DetectionInfo {
+@Table(name = "Detection")
+public class Detection {
 
     @Id
     @GeneratedValue
