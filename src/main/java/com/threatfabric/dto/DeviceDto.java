@@ -4,24 +4,37 @@ package com.threatfabric.dto;
 
 import com.threatfabric.entity.DeviceType;
 
+import javax.validation.constraints.NotNull;
+
 public class DeviceDto {
 
     public DeviceDto() {
     }
-
     private Long id;
+    private Long version;
+    @NotNull
     private String deviceUid;
-    private DeviceType deviceType;
+    @NotNull
     private String deviceModel;
+    @NotNull
     private String osVersion;
-    //private List<DetectionDto> detections = new ArrayList<>();
+    @NotNull
+    private DeviceType deviceType;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getVersion() {
+        return version;
     }
 
     public String getDeviceUid() {
@@ -56,11 +69,4 @@ public class DeviceDto {
         this.osVersion = osVersion;
     }
 
-   /* public List<DetectionDto> getDetections() {
-        return detections;
-    }
-
-    public void setDetections(List<DetectionDto> detections) {
-        this.detections = detections;
-    }*/
 }

@@ -1,6 +1,7 @@
 package com.threatfabric.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +14,24 @@ public class Device {
     @GeneratedValue
     private Long id;
 
+    @Version
+    @Column(name="OPTLOCK")
+    private Long version;
+
+    @NotNull
     @Column(unique = true)
     private String deviceUid;
 
+    @NotNull
     private String deviceModel;
 
+    @NotNull
     private String osVersion;
 
     @OneToMany(mappedBy = "device",fetch = FetchType.LAZY)
     private List<Detection> detections = new ArrayList<>();
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private DeviceType deviceType;
 
@@ -32,6 +41,14 @@ public class Device {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public String getDeviceUid() {
