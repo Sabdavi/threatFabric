@@ -20,9 +20,10 @@ public class Detection {
 
     private String nameOfApp;
 
-    private String typeOfApp;
+    @Enumerated(EnumType.STRING)
+    private AppType typeOfApp;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private Device device;
 
     @Enumerated(EnumType.STRING)
@@ -60,11 +61,11 @@ public class Detection {
         this.nameOfApp = nameOfApp;
     }
 
-    public String getTypeOfApp() {
+    public AppType getTypeOfApp() {
         return typeOfApp;
     }
 
-    public void setTypeOfApp(String typeOfApp) {
+    public void setTypeOfApp(AppType typeOfApp) {
         this.typeOfApp = typeOfApp;
     }
 

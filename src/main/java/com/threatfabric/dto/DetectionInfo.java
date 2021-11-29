@@ -3,11 +3,11 @@ package com.threatfabric.dto;
 
 import java.util.List;
 
-public class MessageDto {
+public class DetectionInfo {
     private DeviceDto deviceDto;
     private List<DetectionDto> detectionDtos;
 
-    public MessageDto() {
+    public DetectionInfo() {
     }
 
     public DeviceDto getDevice() {

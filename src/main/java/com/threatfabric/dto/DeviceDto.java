@@ -14,6 +14,7 @@ public class DeviceDto {
     private DeviceType deviceType;
     private String deviceModel;
     private String osVersion;
+    //private List<DetectionDto> detections = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -54,4 +55,12 @@ public class DeviceDto {
     public void setOsVersion(String osVersion) {
         this.osVersion = osVersion;
     }
+
+   /* public List<DetectionDto> getDetections() {
+        return detections;
+    }
+
+    public void setDetections(List<DetectionDto> detections) {
+        this.detections = detections;
+    }*/
 }

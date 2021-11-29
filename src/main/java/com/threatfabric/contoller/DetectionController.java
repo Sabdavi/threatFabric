@@ -1,54 +1,79 @@
 package com.threatfabric.contoller;
 
 import com.threatfabric.dto.DetectionDto;
-import com.threatfabric.dto.DeviceDto;
-import com.threatfabric.dto.MessageDto;
+import com.threatfabric.dto.DetectionSearchCriteria;
+import com.threatfabric.entity.AppType;
 import com.threatfabric.entity.Detection;
-import com.threatfabric.entity.Device;
-import com.threatfabric.service.MessageService;
+import com.threatfabric.entity.DetectionType;
+import com.threatfabric.entity.DeviceType;
+import com.threatfabric.service.DetectionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 public class DetectionController {
 
-    private MessageService messageService;
+    private DetectionService detectionService;
     private ModelMapper modelMapper;
 
     @Autowired
-    public DetectionController(MessageService messageService, ModelMapper modelMapper) {
-        this.messageService = messageService;
+    public DetectionController(DetectionService detectionService, ModelMapper modelMapper) {
+        this.detectionService = detectionService;
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/detection")
-    public ResponseEntity<Detection> saveDetection(@RequestBody MessageDto messageDto) {
+    @GetMapping("/detection")
+    public ResponseEntity<List<DetectionDto>> getDetectionInfos(
+            @RequestParam(required = false) DeviceType deviceType,
+            @RequestParam(required = false) String osVersion,
+            @RequestParam(required = false) DetectionType detectionType,
+            @RequestParam(required = false)  @DateTimeFormat(pattern  ="yyyy-MM-dd") Date fromTime,
+            @RequestParam(required = false) @DateTimeFormat(pattern  ="yyyy-MM-dd") Date toTime,
+            @RequestParam(required = false) AppType appType){
 
-        Device device = convertToDeviceEntity(messageDto.getDevice());
-        List<Detection> detections = messageDto.getDetections()
+
+        DetectionSearchCriteria searchCriteria = createSearchCriteria(deviceType, osVersion,
+                detectionType, fromTime, toTime, appType);
+        List<Detection> detections = detectionService.getDetections(searchCriteria);
+        List<DetectionDto> detectionDtos = detections
                 .stream()
-                .map(this::convertToDetectionEntity)
+                .map(this::convertToDetectionDto)
                 .collect(Collectors.toList());
-        messageService.saveMessage(device, detections);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(detectionDtos, HttpStatus.ACCEPTED);
     }
 
-    private Device convertToDeviceEntity(DeviceDto deviceDto) {
-        Device device = modelMapper.map(deviceDto, Device.class);
-        return device;
+    private DetectionSearchCriteria createSearchCriteria(DeviceType deviceType,
+                                                         String osVersion,
+                                                         DetectionType detectionType,
+                                                         Date from,
+                                                         Date to,
+                                                         AppType appType){
+
+        DetectionSearchCriteria detectionSearchCriteria = new DetectionSearchCriteria();
+        Optional.ofNullable(deviceType).ifPresent(detectionSearchCriteria::setDeviceType);
+        Optional.ofNullable(osVersion).ifPresent(detectionSearchCriteria::setOsVersion);
+        Optional.ofNullable(detectionType).ifPresent(detectionSearchCriteria::setDetectionType);
+        Optional.ofNullable(from).ifPresent(detectionSearchCriteria::setFromTime);
+        Optional.ofNullable(to).ifPresent(detectionSearchCriteria::setToTime);
+        Optional.ofNullable(appType).ifPresent(detectionSearchCriteria::setAppType);
+
+        return detectionSearchCriteria;
+
     }
 
-    private Detection convertToDetectionEntity(DetectionDto detectionDto) {
-        Detection detection = modelMapper.map(detectionDto, Detection.class);
-        return detection;
+    private DetectionDto convertToDetectionDto(Detection detection) {
+        DetectionDto detectionDto = modelMapper.map(detection, DetectionDto.class);
+        return detectionDto;
     }
 }

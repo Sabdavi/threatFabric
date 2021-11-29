@@ -20,7 +20,7 @@ public class Device {
 
     private String osVersion;
 
-    @OneToMany(mappedBy = "device")
+    @OneToMany(mappedBy = "device",fetch = FetchType.LAZY)
     private List<Detection> detections = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -49,6 +49,8 @@ public class Device {
     public void setDeviceModel(String deviceModel) {
         this.deviceModel = deviceModel;
     }
+
+
 
     public DeviceType getDeviceType() {
         return deviceType;

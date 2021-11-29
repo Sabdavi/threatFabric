@@ -2,6 +2,7 @@ package com.threatfabric.dto;
 
 //import javax.validation.constraints.NotNull;
 
+import com.threatfabric.entity.AppType;
 import com.threatfabric.entity.DetectionType;
 
 import java.util.Date;
@@ -16,8 +17,9 @@ public class DetectionDto {
     private String detectionId;
     private Date detectionTime;
     private String nameOfApp;
-    private String typeOfApp;
+    private AppType typeOfApp;
     private DetectionType detectionType;
+    private DeviceDto device;
 
     public Long getId() {
         return id;
@@ -51,11 +53,11 @@ public class DetectionDto {
         this.nameOfApp = nameOfApp;
     }
 
-    public String getTypeOfApp() {
+    public AppType getTypeOfApp() {
         return typeOfApp;
     }
 
-    public void setTypeOfApp(String typeOfApp) {
+    public void setTypeOfApp(AppType typeOfApp) {
         this.typeOfApp = typeOfApp;
     }
 
@@ -65,5 +67,13 @@ public class DetectionDto {
 
     public void setDetectionType(DetectionType detectionType) {
         this.detectionType = detectionType;
+    }
+
+    public DeviceDto getDevice() {
+        return device;
+    }
+
+    public void setDevice(DeviceDto device) {
+        this.device = device;
     }
 }

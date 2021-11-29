@@ -1,5 +1,6 @@
 package com.threatfabric.dao;
 
+import com.threatfabric.dto.DetectionSearchCriteria;
 import com.threatfabric.entity.Detection;
 import com.threatfabric.entity.DetectionType;
 import com.threatfabric.entity.Device;
@@ -12,27 +13,32 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MessageDaoImpl implements MessageDao {
+public class DetectionInfoDaoImpl implements DetectionInfoDao {
 
     private DeviceDao deviceDao;
     private DetectionDao detectionDao;
     private SessionFactory sessionFactory;
 
     @Autowired
-    public MessageDaoImpl(SessionFactory sessionFactory, DeviceDao deviceDao, DetectionDao detectionDao) {
+    public DetectionInfoDaoImpl(SessionFactory sessionFactory, DeviceDao deviceDao, DetectionDao detectionDao) {
         this.sessionFactory = sessionFactory;
         this.deviceDao = deviceDao;
         this.detectionDao = detectionDao;
     }
 
     @Override
-    public void saveMessage(Device device, List<Detection> detections) {
+    public void saveDetectionInfo(Device device, List<Detection> detections) {
 
         try (Session session = sessionFactory.openSession()) {
             Device savedDevice = saveDevice(device, session);
             saveDetections(savedDevice, detections, session);
         }
 
+    }
+
+    @Override
+    public List<Object> getDetectionInfos(DetectionSearchCriteria detectionSearchCriteria) {
+        return null;
     }
 
     private Device saveDevice(Device device, Session session) {
